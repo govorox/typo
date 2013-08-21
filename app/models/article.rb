@@ -415,6 +415,10 @@ class Article < Content
   def access_by?(user)
     user.admin? || user_id == user.id
   end
+  
+  def merge_with(merge_article_id)
+    return true
+  end
 
   protected
 

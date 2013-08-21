@@ -11,6 +11,11 @@ class ArticlesController < ContentController
   }
 
   helper :'admin/base'
+  
+  def merge_with
+    merge_id = params[:merge_with]
+    return true
+  end
 
   def index
     respond_to do |format|
