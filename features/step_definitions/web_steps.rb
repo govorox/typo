@@ -64,7 +64,6 @@ And /^I am viewing articles$/ do
   end
 end
 
-
 # Single-line step scoper
 When /^(.*) within (.*[^:])$/ do |step, parent|
   with_scope(parent) { When step }
