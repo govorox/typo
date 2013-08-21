@@ -427,7 +427,7 @@ class Article < Content
     self.comments << merging.comments
     self.save!
     # Erase the merged
-    # reload the object to avoid erasing dependants
+    # reload the object to avoid erasing comments
     merging = Article.find_by_id(merge_article_id)
     merging.destroy
     return true
