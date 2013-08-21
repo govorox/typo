@@ -55,6 +55,16 @@ And /^I am logged into the admin panel$/ do
   end
 end
 
+And /^I am viewing articles$/ do
+  visit '/admin/content'
+  if page.respond_to? :should
+    page.should have_content('Manage Articles')
+  else
+    assert page.has_content?('Manage Articles')
+  end
+end
+
+
 # Single-line step scoper
 When /^(.*) within (.*[^:])$/ do |step, parent|
   with_scope(parent) { When step }
