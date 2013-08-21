@@ -25,6 +25,29 @@ describe Article do
     a = Article.new
     assert_equal [:body, :extended], a.content_fields
   end
+  
+  describe "#merge_with" do
+    it "should merge a given existing article and all its comments into this article" do
+      this_article = Factory(:article,  :body => 'This')
+      other_article = Factory(:article,  :body => 'Other')
+      this_article.comments << Factory(:comment)
+      this_article.comments << Factory(:comment)
+      other_article.comments << Factory(:comment)
+      other_article.comments << Factory(:comment)
+      assert this_article.merge_with(other_article.id)
+      assert_equal 4,a.comments.size
+    end
+    it "merged articles should contain body of both articles" do
+      this_article = Factory(:article,  :body => 'This')
+      other_article = Factory(:article,  :body => 'Other')
+      assert this_article.merge_with(other_article.id)
+      assert_equal "This\n\nOther", a.body
+    end
+    it "should not merge non-existant articles" do
+      this_article = Factory(:article,  :body => 'This')
+      this_article.merge_with(0).should be_false
+    end
+  end
 
   describe "#permalink_url" do
     describe "with hostname" do

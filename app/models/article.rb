@@ -417,6 +417,19 @@ class Article < Content
   end
   
   def merge_with(merge_article_id)
+    merging = Article.find_by_id(merge_article_id)
+    if not self.id or not merging or merging.id == self.id
+      return false
+    end
+    # Concatenate content
+    self.body = self.body + "\n\n" + merging.body
+    # Addend comments
+    self.comments << merging.comments
+    self.save!
+    # Erase the merged
+    # reload the object to avoid erasing dependants
+    merging = Article.find_by_id(merge_article_id)
+    merging.destroy
     return true
   end
 
