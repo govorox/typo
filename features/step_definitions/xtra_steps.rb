@@ -23,3 +23,11 @@ Given /I am logged in as "(.*?)" with pass "(.*?)"$/ do |user, pass|
   end
 end
 
+And /^I am viewing categories$/ do
+  visit '/admin/category'
+  if page.respond_to? :should
+    page.should have_content('Manage Categories')
+  else
+    assert page.has_content?('Manage Categories')
+  end
+end

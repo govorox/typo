@@ -30,6 +30,15 @@ module NavigationHelpers
     when /^the edit article page for "(.*)"$/
       article_id=Article.find_by_title($1).id
       "/admin/content/edit/#{article_id}"
+    #
+    #when /^the categories page$/
+    #  '/admin/categories/new'
+    when /^the new category page$/
+      '/admin/categories/new'
+    #when /^the edit category page with id "(.*)"$/
+    #  cat_id=$1
+    #  "/admin/categories/edit/#{cat_id}"
+    
     
     else
       begin
